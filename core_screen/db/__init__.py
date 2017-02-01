@@ -20,8 +20,8 @@ engine = create_engine(connection_string)
 session = sessionmaker(bind=engine)()
 
 # Import all models
-from htsohm.db.base import Base
-from htsohm.db.material import Material
+from core_screen.db.base import Base
+from core_screen.db.material import Material
 
 # Create tables in the engine, if they don't exist already.
 Base.metadata.create_all(engine)

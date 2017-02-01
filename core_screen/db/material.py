@@ -5,8 +5,8 @@ import uuid
 from sqlalchemy import Column, ForeignKey, Integer, String, Float, Boolean
 from sqlalchemy.sql import text
 
-from htsohm import config
-from htsohm.db import Base, session, engine
+from core_screen import config
+from core_screen.db import Base, session, engine
 
 class Material(Base):
     """Declarative class mapping to table storing material/simulation data.
