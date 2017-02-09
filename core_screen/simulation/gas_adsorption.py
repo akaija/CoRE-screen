@@ -38,7 +38,7 @@ def write_raspa_file(filename, name, helium_void_fraction=None):
             "\n" +
             "Framework              0\n" +
             "FrameworkName          %s\n" % (name) +
-            "UnitCells              1 1 1\n"
+            "UnitCells              3 3 3\n"
         )
         if 'helium_void_fraction' != None:
             raspa_input_file.write("HeliumVoidFraction     %s\n" % (helium_void_fraction))
@@ -162,7 +162,8 @@ def run(name, helium_void_fraction=None):
     
     write_raspa_file(filename, name, helium_void_fraction)
     force_field_path = os.path.join(
-            core_screen_dir, 'simulation', 'forcefield')
+            core_screen_dir, 'simulation', 'GenericMOFs')
+#            core_screen_dir, 'simulation', 'forcefield')
     shutil.copy(os.path.join(force_field_path, 'force_field_mixing_rules.def'),
             output_dir)
     shutil.copy(os.path.join(force_field_path, 'force_field.def'), output_dir)
@@ -202,7 +203,7 @@ def run(name, helium_void_fraction=None):
                     output_file = os.path.join(output_subdir, file)
             print('OUTPUT FILE:\t%s' % output_file)
             results = parse_output(output_file)
-            shutil.rmtree(output_dir, ignore_errors=True)
+#            shutil.rmtree(output_dir, ignore_errors=True)
             sys.stdout.flush()
         except FileNotFoundError as err:
             print(err)

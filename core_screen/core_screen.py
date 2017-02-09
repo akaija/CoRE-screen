@@ -10,6 +10,7 @@ from sqlalchemy.orm.exc import FlushError
 import core_screen
 from core_screen import config
 from core_screen.db import session, Material
+from core_screen.db.utilities import check_database
 from core_screen import simulation
 
 def run_all_simulations(material):
@@ -60,14 +61,18 @@ def worker_run_loop(run_id):
     for cif_name in material_names:
         name = cif_name[:-4]
         print(name)
-#        if not find_material_in_database(name):
-        material = Material(name)
-        material.name = name
-        try:
-            run_all_simulations(material)
+        if not check_database(name):
+            material = Material(name)
+            material.name = name
             session.add(material)
             session.commit()
-        except:
-            pass
+#        try:
+            run_all_simulations(material)
+#            session.add(material)
+            session.commit()
+        else:
+            print('Material %s already in database!' % name)
+#        except:
+#            pass
 
         sys.stdout.flush()

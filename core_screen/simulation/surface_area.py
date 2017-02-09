@@ -32,7 +32,7 @@ def write_raspa_file(filename, name):
             "\n" +
             "Framework                  0\n" +
             "FrameworkName              %s\n" % (name) +
-            "UnitCells                  1 1 1\n" +
+            "UnitCells                  3 3 3\n" +
             "SurfaceAreaProbeDistance   Minimum\n" +
             "\n" +
             "Component 0 MoleculeName               N2\n" +
@@ -104,7 +104,7 @@ def run(name):
 
     write_raspa_file(filename, name)
     force_field_path = os.path.join(
-            core_screen_dir, 'simulation', 'forcefield')
+            core_screen_dir, 'simulation', 'GenericMOFs')
     shutil.copy(os.path.join(force_field_path, 'force_field_mixing_rules.def'),
             output_dir)
     shutil.copy(os.path.join(force_field_path, 'force_field.def'), output_dir)
@@ -120,10 +120,10 @@ def run(name):
             print("Calculating surface area of %s..." % (name))
             subprocess.run(['simulate', './SurfaceArea.input'], check=True, cwd=output_dir)
 
-            filename = "output_%s_1.1.1_298.000000_0.data" % (name)
+            filename = "output_%s_3.3.3_298.000000_0.data" % (name)
             output_file = os.path.join(output_dir, 'Output', 'System_0', filename)
             results = parse_output(output_file)
-            shutil.rmtree(output_dir, ignore_errors=True)
+#            shutil.rmtree(output_dir, ignore_errors=True)
             sys.stdout.flush()
         except (FileNotFoundError, KeyError) as err:
             print(err)

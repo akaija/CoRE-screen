@@ -4,14 +4,14 @@ material_properties: ['gas_adsorption', 'surface_area', 'helium_void_fraction']
 
 gas_adsorption:
   adsorbate: 'methane'
-  simulation_cycles: 100
-  initialization_cycles: 100
+  simulation_cycles: 50
+  initialization_cycles: 50
   external_temperature: 298
   external_pressure: 3500000
   limits: [0, 300]
 helium_void_fraction:
-  simulation_cycles: 100
+  simulation_cycles: 50
   limits: [0, 1]
 surface_area:
-  simulation_cycles: 10
+  simulation_cycles: 5
   limits: [0, 4500]
