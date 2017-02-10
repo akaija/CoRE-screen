@@ -4,6 +4,7 @@ from math import sqrt
 from datetime import datetime
 
 import numpy as np
+import sqlalchemy
 from sqlalchemy.sql import func, or_
 from sqlalchemy.orm.exc import FlushError
 
@@ -60,18 +61,19 @@ def worker_run_loop(run_id):
 
     for cif_name in material_names:
         name = cif_name[:-4]
-        print(name)
-        if not check_database(name):
+#        print(name)
+        if not check_for_data(name):
             material = Material(name)
             material.name = name
+#        try:
             session.add(material)
             session.commit()
-#        try:
             run_all_simulations(material)
-#            session.add(material)
             session.commit()
+#        except (FlushError, sqlalchemy.exc.IntegrityError) as e:
         else:
             print('Material %s already in database!' % name)
+#            session.rollback()
 #        except:
 #            pass
 
