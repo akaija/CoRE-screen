@@ -3,6 +3,7 @@ core_screen/*_clean5b/
 core_screen/*_charged/
 core_screen/*_clean/
 core_screen/__pycache__/
+core_screen/simulation/__pycache__/
 core_screen/db/__pycache__/
 settings/database.yaml
 
