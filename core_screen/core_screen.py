@@ -11,7 +11,7 @@ from sqlalchemy.orm.exc import FlushError
 import core_screen
 from core_screen import config
 from core_screen.db import session, Material
-from core_screen.db.utilities import check_database
+from core_screen.db.utilities import check_for_data
 from core_screen import simulation
 
 def run_all_simulations(material):
@@ -33,12 +33,20 @@ def run_all_simulations(material):
         material.update_from_dict(results)
     ############################################################################
     # run gas loading simulation
-    if 'gas_adsorption' in simulations:
+    if 'gas_adsorption_0' in simulations:
         arguments = [material.name]
         if 'helium_void_fraction' in simulations:
             arguments.append(material.vf_helium_void_fraction)
-        results = simulation.gas_adsorption.run(*arguments)
+        results = simulation.gas_adsorption_0.run(*arguments)
         material.update_from_dict(results)
+
+    if 'gas_adsorption_1' in simulations:
+        arguments = [material.name]
+        if 'helium_void_fraction' in simulations:
+            arguments.append(material.vf_helium_void_fraction)
+        results = simulation.gas_adsorption_1.run(*arguments)
+        material.update_from_dict(results)
+
     ############################################################################
     # run surface area simulation
     if 'surface_area' in simulations:
@@ -56,7 +64,7 @@ def worker_run_loop(run_id):
 
     """
     core_screen_dir = os.path.dirname(core_screen.__file__)
-    core_mof_dir = os.path.join(core_screen_dir, 'core-mof-july2014')
+    core_mof_dir = os.path.join(core_screen_dir, 'cif_files')
     material_names = os.listdir(core_mof_dir)
 
     for cif_name in material_names:

@@ -32,7 +32,7 @@ def write_raspa_file(filename, name):
             "\n" +
             "Framework              0\n" +
             "FrameworkName          %s\n" % (name) +
-            "UnitCells              3 3 3\n" +
+            "UnitCells              2 2 2\n" +
             "ExternalTemperature    298.0\n" +    # External temperature, K
             "\n" +
             "Component 0 MoleculeName               helium\n" +
@@ -96,9 +96,10 @@ def run(name):
             output_dir)
     shutil.copy(os.path.join(force_field_path, 'force_field.def'), output_dir)
     shutil.copy(os.path.join(force_field_path, 'pseudo_atoms.def'), output_dir)
-    cif_path = os.path.join(core_screen_dir, 'core-mof-july2014')
-    shutil.copy(os.path.join(cif_path, '%s.cif' % name), output_dir)
-
+    cif_path = os.path.join(core_screen_dir, 'cif_files')
+    mat_path = os.path.join(cif_path, '%s.cif' % name)
+    print(mat_path)
+    shutil.copy(mat_path, output_dir)
 
     while True:
         try:
@@ -106,7 +107,7 @@ def run(name):
             print("Time :\t%s" % datetime.now().time().isoformat())
             print("Calculating void fraction of %s..." % (name))
             subprocess.run(['simulate', './VoidFraction.input'], check=True, cwd=output_dir)
-            filename = "output_%s_3.3.3_298.000000_0.data" % (name)
+            filename = "output_%s_2.2.2_298.000000_0.data" % (name)
             output_file = os.path.join(output_dir, 'Output', 'System_0', filename)
             results = parse_output(output_file)
 #            shutil.rmtree(output_dir, ignore_errors=True)

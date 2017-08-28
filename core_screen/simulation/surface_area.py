@@ -32,8 +32,8 @@ def write_raspa_file(filename, name):
             "\n" +
             "Framework                  0\n" +
             "FrameworkName              %s\n" % (name) +
-            "UnitCells                  3 3 3\n" +
-            "SurfaceAreaProbeDistance   Minimum\n" +
+            "UnitCells                  2 2 2\n" +
+            "SurfaceAreaProbeDistance   Sigma\n" +
             "\n" +
             "Component 0 MoleculeName               N2\n" +
             "            StartingBead               0\n" +
@@ -109,7 +109,7 @@ def run(name):
             output_dir)
     shutil.copy(os.path.join(force_field_path, 'force_field.def'), output_dir)
     shutil.copy(os.path.join(force_field_path, 'pseudo_atoms.def'), output_dir)
-    cif_path = os.path.join(core_screen_dir, 'core-mof-july2014')
+    cif_path = os.path.join(core_screen_dir, 'cif_files')
     shutil.copy(os.path.join(cif_path, '%s.cif' % name), output_dir)
 
 
@@ -120,7 +120,7 @@ def run(name):
             print("Calculating surface area of %s..." % (name))
             subprocess.run(['simulate', './SurfaceArea.input'], check=True, cwd=output_dir)
 
-            filename = "output_%s_3.3.3_298.000000_0.data" % (name)
+            filename = "output_%s_2.2.2_298.000000_0.data" % (name)
             output_file = os.path.join(output_dir, 'Output', 'System_0', filename)
             results = parse_output(output_file)
 #            shutil.rmtree(output_dir, ignore_errors=True)

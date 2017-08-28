@@ -1,17 +1,24 @@
-simulations_directory: 'LOCAL'
+simulations_directory: 'SCRATCH'
 
-material_properties: ['gas_adsorption', 'surface_area', 'helium_void_fraction']
+material_properties: ['gas_adsorption_0', 'gas_adsorption_1', 'surface_area', 'helium_void_fraction']
 
-gas_adsorption:
+gas_adsorption_0:
   adsorbate: 'methane'
-  simulation_cycles: 50
-  initialization_cycles: 50
+  simulation_cycles: 500
+  initialization_cycles: 500
   external_temperature: 298
   external_pressure: 3500000
   limits: [0, 300]
+gas_adsorption_0:
+  adsorbate: 'methane'
+  simulation_cycles: 500
+  initialization_cycles: 500
+  external_temperature: 298
+  external_pressure: 5800000
+  limits: [0, 300]
 helium_void_fraction:
-  simulation_cycles: 50
+  simulation_cycles: 500
   limits: [0, 1]
 surface_area:
-  simulation_cycles: 5
+  simulation_cycles: 100
   limits: [0, 4500]

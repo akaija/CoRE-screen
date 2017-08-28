@@ -1,3 +1,4 @@
 import core_screen.simulation.helium_void_fraction
-import core_screen.simulation.gas_adsorption
+import core_screen.simulation.gas_adsorption_0
+import core_screen.simulation.gas_adsorption_1
 import core_screen.simulation.surface_area
